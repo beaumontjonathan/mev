@@ -13,7 +13,6 @@ describe('BooleanRule', () => {
         it('should fail if the input is false', () => {
             const rule = new BooleanRule_1.BooleanRule().true();
             const expectedError = {
-                success: false,
                 title: 'not true',
                 description: 'must be true',
             };
@@ -28,7 +27,6 @@ describe('BooleanRule', () => {
         it('should fail if the input is true', () => {
             const rule = new BooleanRule_1.BooleanRule().false();
             const expectedError = {
-                success: false,
                 title: 'not false',
                 description: 'must be false',
             };

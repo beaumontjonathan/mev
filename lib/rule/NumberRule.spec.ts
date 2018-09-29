@@ -10,7 +10,6 @@ describe('NumberRule', () => {
       const rule = new NumberRule().min(5);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'less than minimum',
         description: 'must be greater than the minimum value of 5',
       };
@@ -36,7 +35,6 @@ describe('NumberRule', () => {
       const rule = new NumberRule().closedMin(5);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'less than minimum',
         description: 'must be greater than the minimum value of 5',
       };
@@ -62,7 +60,6 @@ describe('NumberRule', () => {
       const rule = new NumberRule().openMin(5);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'less than or equal to minimum',
         description: 'must be greater than the open minimum value of 5',
       };
@@ -74,7 +71,6 @@ describe('NumberRule', () => {
       const rule = new NumberRule().openMin(5);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'less than or equal to minimum',
         description: 'must be greater than the open minimum value of 5',
       };
@@ -94,7 +90,6 @@ describe('NumberRule', () => {
       const rule = new NumberRule().max(5);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'greater than maximum',
         description: 'must be less than the maximum value of 5',
       };
@@ -120,7 +115,6 @@ describe('NumberRule', () => {
       const rule = new NumberRule().closedMax(5);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'greater than maximum',
         description: 'must be less than the maximum value of 5',
       };
@@ -143,7 +137,6 @@ describe('NumberRule', () => {
 
   describe('open max', () => {
     const expectedError: ValidationRuleError = {
-      success: false,
       title: 'greater than or equal to maximum',
       description: 'must be less than the open maximum value of 5',
     };
@@ -169,7 +162,6 @@ describe('NumberRule', () => {
 
   describe('closedInterval', () => {
     const expectedError: ValidationRuleError = {
-      success: false,
       title: 'outside closed interval',
       description: 'outside of the closed interval of [2,4]',
     };
@@ -207,7 +199,6 @@ describe('NumberRule', () => {
 
   describe('openInterval', () => {
     const expectedError: ValidationRuleError = {
-      success: false,
       title: 'outside open interval',
       description: 'outside of the open interval of (2,4)',
     };

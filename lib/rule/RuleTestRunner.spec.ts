@@ -24,7 +24,7 @@ describe('RuleTestRunner', () => {
           title: 'test title',
           description: 'test description, typically more detailed',
         };
-        const expectedError: ValidationRuleError = { success: false, ...defaultError };
+        const expectedError: ValidationRuleError = { ...defaultError };
         testRunner.addTest({
           test: falsyTest,
           defaultError,
@@ -45,7 +45,6 @@ describe('RuleTestRunner', () => {
         };
 
         const expectedError: ValidationRuleError = {
-          success: false,
           title: `${defaultError1.title}, ${defaultError2.title}`,
           description: `${defaultError1.description}, ${defaultError2.description}`,
         };
@@ -70,7 +69,6 @@ describe('RuleTestRunner', () => {
         };
 
         const expectedError: ValidationRuleError = {
-          success: false,
           title: `${defaultError1.title}; ${defaultError2.title}`,
           description: `${defaultError1.description}; ${defaultError2.description}`,
         };
@@ -99,7 +97,6 @@ describe('RuleTestRunner', () => {
         };
 
         const expectedError: ValidationRuleError = {
-          success: false,
           title: `${defaultError1.title}, ${defaultError3.title}`,
           description: `${defaultError1.description}, ${defaultError3.description}`,
         };

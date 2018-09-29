@@ -7,7 +7,6 @@ import { StringRule } from './StringRule';
 describe('StringRule', () => {
   context('when testing non-string inputs', () => {
     const getExpectedError: (type: string) => ValidationRuleError = (type: string) => ({
-      success: false,
       title: `type must be string`,
       description: `must have type 'string' but was really of type '${type}'`,
     });
@@ -72,7 +71,6 @@ describe('StringRule', () => {
       const rule = new StringRule().minLength(4);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'too short',
         description: 'must be at least 4 characters long',
       };
@@ -98,7 +96,6 @@ describe('StringRule', () => {
       const rule = new StringRule().maxLength(4);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'too long',
         description: 'must not be longer than 4 characters long',
       };
@@ -124,7 +121,6 @@ describe('StringRule', () => {
       const rule = new StringRule().blacklist(['hello', 'world']);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'failed blacklist',
         description: 'must not contain one of the blacklisted phrases \'hello\', \'world\'',
       };
@@ -150,7 +146,6 @@ describe('StringRule', () => {
       const rule = new StringRule().upperCase();
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'contains lowercase',
         description: 'must not contain lowercase characters',
       };
@@ -176,7 +171,6 @@ describe('StringRule', () => {
       const rule = new StringRule().lowerCase();
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'contains uppercase',
         description: 'must not contain uppercase characters',
       };
@@ -202,7 +196,6 @@ describe('StringRule', () => {
       const rule = new StringRule().alphanumeric();
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'not alphanumeric',
         description: 'must only contain letters and numbers',
       };
@@ -230,7 +223,6 @@ describe('StringRule', () => {
       const rule = new StringRule().regex(failingRegex);
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'failed regex',
         description: 'failed the regular expression \'/blablabla/\'',
       };

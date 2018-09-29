@@ -7,7 +7,6 @@ const StringRule_1 = require("./StringRule");
 describe('StringRule', () => {
     context('when testing non-string inputs', () => {
         const getExpectedError = (type) => ({
-            success: false,
             title: `type must be string`,
             description: `must have type 'string' but was really of type '${type}'`,
         });
@@ -56,7 +55,6 @@ describe('StringRule', () => {
         it('should reject strings shorter than the minimum length', () => {
             const rule = new StringRule_1.StringRule().minLength(4);
             const expectedError = {
-                success: false,
                 title: 'too short',
                 description: 'must be at least 4 characters long',
             };
@@ -75,7 +73,6 @@ describe('StringRule', () => {
         it('should reject strings longer than the maximum length', () => {
             const rule = new StringRule_1.StringRule().maxLength(4);
             const expectedError = {
-                success: false,
                 title: 'too long',
                 description: 'must not be longer than 4 characters long',
             };
@@ -94,7 +91,6 @@ describe('StringRule', () => {
         it('should fail when at least one item from the blacklist is a substring of the input', () => {
             const rule = new StringRule_1.StringRule().blacklist(['hello', 'world']);
             const expectedError = {
-                success: false,
                 title: 'failed blacklist',
                 description: 'must not contain one of the blacklisted phrases \'hello\', \'world\'',
             };
@@ -113,7 +109,6 @@ describe('StringRule', () => {
         it('should reject strings with lowercase letters', () => {
             const rule = new StringRule_1.StringRule().upperCase();
             const expectedError = {
-                success: false,
                 title: 'contains lowercase',
                 description: 'must not contain lowercase characters',
             };
@@ -132,7 +127,6 @@ describe('StringRule', () => {
         it('should reject strings with uppercase letters', () => {
             const rule = new StringRule_1.StringRule().lowerCase();
             const expectedError = {
-                success: false,
                 title: 'contains uppercase',
                 description: 'must not contain uppercase characters',
             };
@@ -151,7 +145,6 @@ describe('StringRule', () => {
         it('should reject strings including non-alphanumeric characters', () => {
             const rule = new StringRule_1.StringRule().alphanumeric();
             const expectedError = {
-                success: false,
                 title: 'not alphanumeric',
                 description: 'must only contain letters and numbers',
             };
@@ -172,7 +165,6 @@ describe('StringRule', () => {
             const failingRegex = /blablabla/;
             const rule = new StringRule_1.StringRule().regex(failingRegex);
             const expectedError = {
-                success: false,
                 title: 'failed regex',
                 description: 'failed the regular expression \'/blablabla/\'',
             };

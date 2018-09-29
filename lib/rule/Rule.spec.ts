@@ -119,7 +119,6 @@ describe('Rule', () => {
           .addTestFunction(falsyTest);
 
         const expectedError: ValidationRuleError = {
-          success: false,
           title: 'username will fail',
           description: 'username will fail, description',
         };

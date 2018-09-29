@@ -16,7 +16,6 @@ describe('BooleanRule', () => {
       const rule = new BooleanRule().true();
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'not true',
         description: 'must be true',
       };
@@ -36,7 +35,6 @@ describe('BooleanRule', () => {
       const rule = new BooleanRule().false();
 
       const expectedError: ValidationRuleError = {
-        success: false,
         title: 'not false',
         description: 'must be false',
       };

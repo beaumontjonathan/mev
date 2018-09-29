@@ -24,7 +24,6 @@ class Rule {
         const fieldName = this.getFieldNameOrEmpty();
         if (this.resultIsError(validationRuleResult)) {
             return {
-                success: false,
                 title: `${fieldName}${this.internalTitle || validationRuleResult.title}`,
                 description: `${fieldName}${this.internalDescription || validationRuleResult.description}`,
             };

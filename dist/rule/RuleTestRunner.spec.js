@@ -22,7 +22,7 @@ describe('RuleTestRunner', () => {
                     title: 'test title',
                     description: 'test description, typically more detailed',
                 };
-                const expectedError = Object.assign({ success: false }, defaultError);
+                const expectedError = Object.assign({}, defaultError);
                 testRunner.addTest({
                     test: rule_1.falsyTest,
                     defaultError,
@@ -41,7 +41,6 @@ describe('RuleTestRunner', () => {
                     description: 'test description 2',
                 };
                 const expectedError = {
-                    success: false,
                     title: `${defaultError1.title}, ${defaultError2.title}`,
                     description: `${defaultError1.description}, ${defaultError2.description}`,
                 };
@@ -62,7 +61,6 @@ describe('RuleTestRunner', () => {
                     description: 'test description 2',
                 };
                 const expectedError = {
-                    success: false,
                     title: `${defaultError1.title}; ${defaultError2.title}`,
                     description: `${defaultError1.description}; ${defaultError2.description}`,
                 };
@@ -87,7 +85,6 @@ describe('RuleTestRunner', () => {
                     description: 'test description 3',
                 };
                 const expectedError = {
-                    success: false,
                     title: `${defaultError1.title}, ${defaultError3.title}`,
                     description: `${defaultError1.description}, ${defaultError3.description}`,
                 };

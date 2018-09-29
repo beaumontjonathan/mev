@@ -30,7 +30,6 @@ class RuleTestRunner {
     }
     getInitialTypeTestError(data) {
         return {
-            success: false,
             title: `type must be ${this.opts.initialTypeTestType}`,
             description: `must have type '${this.opts.initialTypeTestType}' but was really of type '${typeof data}'`,
         };
@@ -56,7 +55,6 @@ class RuleTestRunner {
             .map((defaultError) => defaultError.description)
             .join(this.opts.defaultErrorJoiner);
         return {
-            success: false,
             title,
             description,
         };

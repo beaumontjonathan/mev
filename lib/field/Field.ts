@@ -1,6 +1,6 @@
 import { Rule } from '../rule/Rule';
 import { Validation } from '../types/Validation';
-import { ValidationRuleError, ValidationRuleResult } from '../types/ValidationRule';
+import { ValidationRuleError, ValidationRuleResult, ValidationRuleSuccess } from '../types/ValidationRule';
 
 export interface FieldOptions {
   rule?: Rule<any>;
@@ -46,7 +46,7 @@ export class Field<T, R extends Rule<T>> {
     if (errors.length === 0) {
       return { success: true };
     } else {
-      return { success: false, errors };
+      return { errors };
     }
   }
 
@@ -56,5 +56,5 @@ export class Field<T, R extends Rule<T>> {
 }
 
 function ruleIsError(r: ValidationRuleResult): r is ValidationRuleError {
-  return !r.success;
+  return !(r as ValidationRuleSuccess).success;
 }

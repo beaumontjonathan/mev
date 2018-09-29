@@ -51,7 +51,6 @@ export class RuleTestRunner<T> {
 
   private getInitialTypeTestError(data: T): ValidationRuleError {
     return {
-      success: false,
       title: `type must be ${this.opts.initialTypeTestType}`,
       description: `must have type '${this.opts.initialTypeTestType}' but was really of type '${typeof data}'`,
     };
@@ -83,7 +82,6 @@ export class RuleTestRunner<T> {
       .map((defaultError) => defaultError.description)
       .join(this.opts.defaultErrorJoiner);
     return {
-      success: false,
       title,
       description,
     };

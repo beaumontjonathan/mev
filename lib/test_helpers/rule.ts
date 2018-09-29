@@ -1,7 +1,6 @@
 import { ValidationRuleError, ValidationRuleSuccess } from '../types/ValidationRule';
 
 export const emptyFail: ValidationRuleError = {
-  success: false,
   title: '',
   description: '',
 };

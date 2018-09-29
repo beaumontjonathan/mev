@@ -1,15 +1,20 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-no-unused-expression-chai"
+  ],
+  "jsRules": {},
+  "rules": {
+    "quotemark": [
+      true,
+      "single"
     ],
-    "jsRules": {},
-    "rules": {
-        "quotemark": [true, "single"],
-        "interface-name": false,
-        "object-literal-sort-keys": false,
-        "no-empty-interface": false,
-        "unified-signatures": false
-    },
-    "rulesDirectory": []
+    "interface-name": false,
+    "object-literal-sort-keys": false,
+    "no-empty-interface": false,
+    "unified-signatures": false
+  },
+  "rulesDirectory": [
+  ]
 }

@@ -32,7 +32,7 @@ class Field {
             return { success: true };
         }
         else {
-            return { success: false, errors };
+            return { errors };
         }
     }
     getNewRule() {

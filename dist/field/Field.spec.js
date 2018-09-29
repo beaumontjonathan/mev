@@ -34,8 +34,7 @@ describe('Field', () => {
                 .addRule((r) => r.addTestFunction(rule_1.truthyTest))
                 .addRule((r) => r.addTestFunction(rule_1.falsyTest));
             const expectedError = {
-                success: false,
-                errors: [rule_1.emptyFail],
+                errors: [Object.assign({}, rule_1.emptyFail)],
             };
             chai_1.expect(field.validate(rule_1.emptyData)).to.deep.equal(expectedError);
             field.addRule((r) => r.addTestFunction(rule_1.falsyTest));

@@ -1,6 +1,7 @@
 import { Field } from '../field/Field';
 import { FieldFactory } from '../field/FieldFactory';
 import { Rule } from '../rule/Rule';
+import { Validation } from '../types/Validation';
 export interface SchemaOptions {
 }
 export declare const defaultSchemaOptions: SchemaOptions;
@@ -10,16 +11,6 @@ export declare class Schema {
     constructor(opts?: SchemaOptions);
     addField<T, F extends Field<T, Rule<T>>>(fieldName: string, field: (ff: FieldFactory<T, Rule<T>>) => F): this;
     addField<T, F extends Field<T, Rule<T>>>(fieldName: string, field: F): this;
-    run(obj: any): {
-        success: boolean;
-        errors?: undefined;
-    } | {
-        success: boolean;
-        errors: {
-            title: string;
-            description: string;
-            fieldName: string;
-        }[];
-    };
+    run(obj: any): Validation;
 }
 export declare function createValidationSchema(opts?: SchemaOptions): Schema;

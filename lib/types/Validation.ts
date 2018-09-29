@@ -1,6 +1,11 @@
 import { ValidationRuleError } from './ValidationRule';
 
-export interface Validation {
-  success: boolean;
-  errors?: ValidationRuleError[];
+export type Validation = ValidationSuccess | ValidationError;
+
+export interface ValidationSuccess {
+  success: true;
+}
+
+export interface ValidationError {
+  errors: ValidationRuleError[];
 }

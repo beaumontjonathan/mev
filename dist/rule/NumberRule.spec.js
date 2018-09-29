@@ -9,7 +9,6 @@ describe('NumberRule', () => {
         it('should reject numbers smaller than the minimum', () => {
             const rule = new NumberRule_1.NumberRule().min(5);
             const expectedError = {
-                success: false,
                 title: 'less than minimum',
                 description: 'must be greater than the minimum value of 5',
             };
@@ -28,7 +27,6 @@ describe('NumberRule', () => {
         it('should reject numbers smaller than the minimum', () => {
             const rule = new NumberRule_1.NumberRule().closedMin(5);
             const expectedError = {
-                success: false,
                 title: 'less than minimum',
                 description: 'must be greater than the minimum value of 5',
             };
@@ -47,7 +45,6 @@ describe('NumberRule', () => {
         it('should reject numbers smaller than the minimum', () => {
             const rule = new NumberRule_1.NumberRule().openMin(5);
             const expectedError = {
-                success: false,
                 title: 'less than or equal to minimum',
                 description: 'must be greater than the open minimum value of 5',
             };
@@ -56,7 +53,6 @@ describe('NumberRule', () => {
         it('should reject numbers equal to the minimum', () => {
             const rule = new NumberRule_1.NumberRule().openMin(5);
             const expectedError = {
-                success: false,
                 title: 'less than or equal to minimum',
                 description: 'must be greater than the open minimum value of 5',
             };
@@ -71,7 +67,6 @@ describe('NumberRule', () => {
         it('should reject numbers greater than the maximum', () => {
             const rule = new NumberRule_1.NumberRule().max(5);
             const expectedError = {
-                success: false,
                 title: 'greater than maximum',
                 description: 'must be less than the maximum value of 5',
             };
@@ -90,7 +85,6 @@ describe('NumberRule', () => {
         it('should reject numbers greater than the maximum', () => {
             const rule = new NumberRule_1.NumberRule().closedMax(5);
             const expectedError = {
-                success: false,
                 title: 'greater than maximum',
                 description: 'must be less than the maximum value of 5',
             };
@@ -107,7 +101,6 @@ describe('NumberRule', () => {
     });
     describe('open max', () => {
         const expectedError = {
-            success: false,
             title: 'greater than or equal to maximum',
             description: 'must be less than the open maximum value of 5',
         };
@@ -126,7 +119,6 @@ describe('NumberRule', () => {
     });
     describe('closedInterval', () => {
         const expectedError = {
-            success: false,
             title: 'outside closed interval',
             description: 'outside of the closed interval of [2,4]',
         };
@@ -153,7 +145,6 @@ describe('NumberRule', () => {
     });
     describe('openInterval', () => {
         const expectedError = {
-            success: false,
             title: 'outside open interval',
             description: 'outside of the open interval of (2,4)',
         };

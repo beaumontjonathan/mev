@@ -47,8 +47,7 @@ describe('Field', () => {
         .addRule((r) => r.addTestFunction(falsyTest));
 
       const expectedError: Validation = {
-        success: false,
-        errors: [emptyFail],
+        errors: [{ ...emptyFail }],
       };
 
       expect(field.validate(emptyData)).to.deep.equal(expectedError);

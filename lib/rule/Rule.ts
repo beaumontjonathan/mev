@@ -2,7 +2,7 @@ import {
   DefaultValidationRuleError,
   RuleTest, TestAndOptionalDefaultError,
   ValidationRuleError,
-  ValidationRuleResult,
+  ValidationRuleResult, ValidationRuleSuccess,
 } from '../types/ValidationRule';
 import { RuleTestRunner, RuleTestRunnerOptions } from './RuleTestRunner';
 
@@ -42,10 +42,8 @@ export class Rule<T> {
   public test(data: T): ValidationRuleResult {
     const validationRuleResult: ValidationRuleResult = this.testRunner.run(data);
     const fieldName = this.getFieldNameOrEmpty();
-
     if (this.resultIsError(validationRuleResult)) {
       return {
-        success: false,
         title: `${fieldName}${this.internalTitle || validationRuleResult.title}`,
         description: `${fieldName}${this.internalDescription || validationRuleResult.description}`,
       };
@@ -64,6 +62,6 @@ export class Rule<T> {
   }
 
   private resultIsError(r: ValidationRuleResult): r is ValidationRuleError {
-    return !r.success;
+    return !(r as ValidationRuleSuccess).success;
   }
 }

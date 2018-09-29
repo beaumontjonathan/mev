@@ -90,7 +90,6 @@ describe('Rule', () => {
                     .description('will fail, description')
                     .addTestFunction(rule_1.falsyTest);
                 const expectedError = {
-                    success: false,
                     title: 'username will fail',
                     description: 'username will fail, description',
                 };

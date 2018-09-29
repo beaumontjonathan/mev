@@ -1,6 +1,9 @@
 import { Field } from '../field/Field';
 import { FieldFactory } from '../field/FieldFactory';
 import { Rule } from '../rule/Rule';
+import { Validation, ValidationError, ValidationSuccess } from '../types/Validation';
+import { ValidationRuleError } from '../types/ValidationRule';
+import { isError, isSuccess } from '../utils';
 
 export interface SchemaOptions {
 }
@@ -34,24 +37,27 @@ export class Schema {
     }
   }
 
-  public run(obj: any) {
+  public run(obj: any): Validation {
+    function objHasResultPropAsFailure(o: { fieldName: string, testResult: Validation }):
+      o is { fieldName: string, testResult: ValidationError } {
+      return isError(o.testResult);
+    }
+
     const errors = Array
       .from(this.fields)
-      .map(([fieldName, field]) => ({ fieldName, result: field.validate(obj[fieldName]) }))
-      .filter(({ result }) => !result.success)
-      .map(({ fieldName, result }) =>
-        result.errors.map(({ title, description }) => ({
+      .map(([fieldName, field]) => ({ fieldName, testResult: field.validate(obj[fieldName]) }))
+      // .filter(({ result }) => !isSuccess(result))
+      .filter(objHasResultPropAsFailure)
+      .map(({ fieldName, testResult }) =>
+        testResult.errors.map(({ title, description }) => ({
           title,
           description,
           fieldName,
         })),
       )
       .reduce((t, e) => t.concat(e), []);
-    if (errors.length === 0) {
-      return { success: true };
-    } else {
-      return { success: false, errors };
-    }
+
+    return errors.length === 0 ? { success: true } : { errors };
   }
 }
 

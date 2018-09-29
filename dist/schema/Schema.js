@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const FieldFactory_1 = require("../field/FieldFactory");
+const utils_1 = require("../utils");
 exports.defaultSchemaOptions = {};
 class Schema {
     constructor(opts = exports.defaultSchemaOptions) {
@@ -20,22 +21,21 @@ class Schema {
         }
     }
     run(obj) {
+        function objHasResultPropAsFailure(o) {
+            return utils_1.isError(o.testResult);
+        }
         const errors = Array
             .from(this.fields)
-            .map(([fieldName, field]) => ({ fieldName, result: field.validate(obj[fieldName]) }))
-            .filter(({ result }) => !result.success)
-            .map(({ fieldName, result }) => result.errors.map(({ title, description }) => ({
+            .map(([fieldName, field]) => ({ fieldName, testResult: field.validate(obj[fieldName]) }))
+            // .filter(({ result }) => !isSuccess(result))
+            .filter(objHasResultPropAsFailure)
+            .map(({ fieldName, testResult }) => testResult.errors.map(({ title, description }) => ({
             title,
             description,
             fieldName,
         })))
             .reduce((t, e) => t.concat(e), []);
-        if (errors.length === 0) {
-            return { success: true };
-        }
-        else {
-            return { success: false, errors };
-        }
+        return errors.length === 0 ? { success: true } : { errors };
     }
 }
 exports.Schema = Schema;
