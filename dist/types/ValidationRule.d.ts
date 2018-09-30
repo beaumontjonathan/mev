@@ -1,6 +1,7 @@
 export declare type ValidationRuleResult = ValidationRuleError | ValidationRuleSuccess;
 export interface ValidationRuleError extends DefaultValidationRuleError {
     fieldName?: string;
+    parent?: string;
 }
 export interface DefaultValidationRuleError {
     title: string;

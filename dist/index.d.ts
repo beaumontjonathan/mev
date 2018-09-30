@@ -1,4 +1,4 @@
 export { createValidationField } from './field/FieldFactory';
 export { createValidationRule } from './rule/RuleFactory';
-export { createValidationSchema } from './schema/Schema';
+export { createValidationSchema, Schema } from './schema/Schema';
 export { isSuccess, isError } from './utils';

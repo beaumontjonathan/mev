@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Rule_1 = require("../rule/Rule");
 exports.defaultFieldOptions = {
     rule: new Rule_1.Rule(),
+    useFieldName: false,
 };
 class Field {
     constructor(opts = exports.defaultFieldOptions) {
-        this.opts = opts;
+        this.opts = Object.assign({}, exports.defaultFieldOptions, opts);
         this.rules = [];
     }
     addRule(d) {

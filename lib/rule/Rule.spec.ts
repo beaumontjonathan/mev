@@ -113,7 +113,7 @@ describe('Rule', () => {
   describe('options', () => {
     describe('fieldName', () => {
       it('should prepend the field name to any error message and description on failure', () => {
-        const rule = new Rule({ fieldName: 'username' })
+        const rule = new Rule({ fieldName: 'username', useFieldName: true })
           .title('will fail')
           .description('will fail, description')
           .addTestFunction(falsyTest);

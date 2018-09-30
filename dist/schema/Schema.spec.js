@@ -12,6 +12,56 @@ describe('Schema', () => {
             chai_1.expect(() => schema.addField(fieldName, (f) => f)).to.throw(Error, `Field ${fieldName} already exists in schema. Duplicate field names are disallowed.`);
         });
     });
+    describe('addSchemaField', () => {
+        it('should accept deep objects as arguments', () => {
+            const childSchema = new Schema_1.Schema()
+                .addField('child', (f) => f
+                .string()
+                .addRule((r) => r.title('title').description('description').maxLength(0)));
+            const parentSchema = new Schema_1.Schema().addSchemaField('parent', childSchema);
+            const expectedError = {
+                errors: [
+                    {
+                        title: 'title',
+                        description: 'description',
+                        fieldName: 'child',
+                        parent: 'parent',
+                    },
+                ],
+            };
+            const validation = parentSchema.run({ parent: { child: 'asdf' } });
+            chai_1.expect(validation).to.deep.equal(expectedError);
+        });
+        it('should accept deeper objects as arguments', () => {
+            const schema1 = new Schema_1.Schema()
+                .addField('internal', (f) => f
+                .string()
+                .addRule((r) => r.title('fail').description('fail').maxLength(0)));
+            const schema2 = new Schema_1.Schema().addSchemaField('schema1', schema1);
+            const schema3 = new Schema_1.Schema().addSchemaField('schema2', schema2);
+            const schema4 = new Schema_1.Schema().addSchemaField('schema3', schema3);
+            const expectedError = {
+                errors: [
+                    {
+                        title: 'fail',
+                        description: 'fail',
+                        fieldName: 'internal',
+                        parent: 'schema1',
+                    },
+                ],
+            };
+            const data = {
+                schema3: {
+                    schema2: {
+                        schema1: {
+                            internal: 'asdf',
+                        },
+                    },
+                },
+            };
+            chai_1.expect(schema4.run(data)).to.deep.equal(expectedError);
+        });
+    });
     describe('run', () => {
         it('should return errors for each failing test for each field', () => {
             const schema = new Schema_1.Schema()

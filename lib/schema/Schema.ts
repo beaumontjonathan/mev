@@ -12,7 +12,7 @@ export const defaultSchemaOptions: SchemaOptions = {};
 
 export class Schema {
   protected opts: SchemaOptions;
-  protected fields: Map<string, Field<any, Rule<any>>>;
+  protected fields: Map<string, Schema | Field<any, Rule<any>>>;
 
   constructor(opts: SchemaOptions = defaultSchemaOptions) {
     this.opts = opts;
@@ -24,17 +24,19 @@ export class Schema {
   public addField<T, F extends Field<T, Rule<T>>>(
     fieldName: string, field: F | ((ff: FieldFactory<T, Rule<T>>) => F),
   ): this {
+    this.ensureFieldNameIsUnique(fieldName);
     if (typeof field === 'function') {
       return this.addField(fieldName, field(new FieldFactory({ ...this.opts, fieldName })));
     } else {
-      if (this.fields.has(fieldName)) {
-        throw new Error(
-          `Field ${fieldName} already exists in schema. Duplicate field names are disallowed.`,
-        );
-      }
       this.fields.set(fieldName, field);
       return this;
     }
+  }
+
+  public addSchemaField(fieldName: string, schema: Schema): this {
+    this.ensureFieldNameIsUnique(fieldName);
+    this.fields.set(fieldName, schema);
+    return this;
   }
 
   public run(obj: any): Validation {
@@ -43,22 +45,58 @@ export class Schema {
       return isError(o.testResult);
     }
 
+    function validateFieldOrSchema(field: Schema | Field<any, Rule<any>>, data: any): Validation {
+      if (isSchema(field)) {
+        return field.run(data);
+      } else {
+        return field.validate(data);
+      }
+    }
+
+    const fieldAndResultToIncludeFieldNameAndOptionallyParent:
+      (a: { fieldName: string, testResult: ValidationError }) => ValidationRuleError[] =
+      (asdf) => {
+        const { fieldName, testResult } = asdf;
+        if (isSchema(this.fields.get(fieldName))) {
+          return testResult.errors.map((error: ValidationRuleError) => ({
+            parent: fieldName,
+            ...error,
+          }));
+        } else {
+          return testResult.errors.map((error: ValidationRuleError) => ({
+            fieldName,
+            ...error,
+          }));
+        }
+      };
+
     const errors = Array
       .from(this.fields)
-      .map(([fieldName, field]) => ({ fieldName, testResult: field.validate(obj[fieldName]) }))
-      // .filter(({ result }) => !isSuccess(result))
+      .map(([fieldName, field]) => ({ fieldName, testResult: validateFieldOrSchema(field, obj[fieldName]) }))
       .filter(objHasResultPropAsFailure)
-      .map(({ fieldName, testResult }) =>
-        testResult.errors.map(({ title, description }) => ({
-          title,
-          description,
+      .map(fieldAndResultToIncludeFieldNameAndOptionallyParent)
+        /*({ fieldName, testResult }) =>
+        testResult.errors.map((error: ValidationRuleError) => ({
           fieldName,
+          ...error,
         })),
-      )
+      )*/
       .reduce((t, e) => t.concat(e), []);
 
     return errors.length === 0 ? { success: true } : { errors };
   }
+
+  private ensureFieldNameIsUnique(fieldName: string) {
+    if (this.fields.has(fieldName)) {
+      throw new Error(
+        `Field ${fieldName} already exists in schema. Duplicate field names are disallowed.`,
+      );
+    }
+  }
+}
+
+export function isSchema(s: Schema | Field<any, Rule<any>>): s is Schema {
+  return s instanceof Schema;
 }
 
 export function createValidationSchema(opts?: SchemaOptions): Schema {

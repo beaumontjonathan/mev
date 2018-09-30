@@ -3,6 +3,7 @@ import { Validation } from '../types/Validation';
 export interface FieldOptions {
     rule?: Rule<any>;
     fieldName?: string;
+    useFieldName?: boolean;
 }
 export declare const defaultFieldOptions: FieldOptions;
 export declare class Field<T, R extends Rule<T>> {

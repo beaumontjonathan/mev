@@ -8,6 +8,7 @@ import { RuleTestRunner, RuleTestRunnerOptions } from './RuleTestRunner';
 
 export interface RuleOptions {
   fieldName?: string;
+  useFieldName?: boolean;
   initialTypeTestType?: string;
 }
 
@@ -20,7 +21,7 @@ export class Rule<T> {
   protected internalDescription: string;
 
   constructor(opts: RuleOptions = defaultRuleOptions) {
-    this.opts = opts;
+    this.opts = { ...defaultRuleOptions, ...opts };
     this.testRunner = new RuleTestRunner<T>({ ...opts } as RuleTestRunnerOptions);
   }
 
@@ -42,10 +43,11 @@ export class Rule<T> {
   public test(data: T): ValidationRuleResult {
     const validationRuleResult: ValidationRuleResult = this.testRunner.run(data);
     const fieldName = this.getFieldNameOrEmpty();
+    const init = this.opts.useFieldName ? fieldName : '';
     if (this.resultIsError(validationRuleResult)) {
       return {
-        title: `${fieldName}${this.internalTitle || validationRuleResult.title}`,
-        description: `${fieldName}${this.internalDescription || validationRuleResult.description}`,
+        title: init + (this.internalTitle || validationRuleResult.title),
+        description: init + (this.internalDescription || validationRuleResult.description),
       };
     } else {
       return { success: true };

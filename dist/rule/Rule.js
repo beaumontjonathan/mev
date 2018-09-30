@@ -4,7 +4,7 @@ const RuleTestRunner_1 = require("./RuleTestRunner");
 exports.defaultRuleOptions = {};
 class Rule {
     constructor(opts = exports.defaultRuleOptions) {
-        this.opts = opts;
+        this.opts = Object.assign({}, exports.defaultRuleOptions, opts);
         this.testRunner = new RuleTestRunner_1.RuleTestRunner(Object.assign({}, opts));
     }
     title(t) {
@@ -22,10 +22,11 @@ class Rule {
     test(data) {
         const validationRuleResult = this.testRunner.run(data);
         const fieldName = this.getFieldNameOrEmpty();
+        const init = this.opts.useFieldName ? fieldName : '';
         if (this.resultIsError(validationRuleResult)) {
             return {
-                title: `${fieldName}${this.internalTitle || validationRuleResult.title}`,
-                description: `${fieldName}${this.internalDescription || validationRuleResult.description}`,
+                title: init + (this.internalTitle || validationRuleResult.title),
+                description: init + (this.internalDescription || validationRuleResult.description),
             };
         }
         else {

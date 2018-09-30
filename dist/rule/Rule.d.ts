@@ -2,6 +2,7 @@ import { DefaultValidationRuleError, RuleTest, ValidationRuleResult } from '../t
 import { RuleTestRunner } from './RuleTestRunner';
 export interface RuleOptions {
     fieldName?: string;
+    useFieldName?: boolean;
     initialTypeTestType?: string;
 }
 export declare const defaultRuleOptions: RuleOptions;

@@ -2,5 +2,7 @@ import { ValidationRuleError, ValidationRuleSuccess } from '../types/ValidationR
 export declare const emptyFail: ValidationRuleError;
 export declare const success: ValidationRuleSuccess;
 export declare const emptyData: any;
-export declare const truthyTest: () => boolean;
-export declare const falsyTest: () => boolean;
+export declare const truthyTest: (o: any) => boolean;
+export declare const falsyTest: (o: any) => boolean;
+export declare const truthyRule: import("../rule/Rule").Rule<any>;
+export declare const falsyRule: import("../rule/Rule").Rule<any>;

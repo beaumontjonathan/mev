@@ -5,10 +5,12 @@ import { ValidationRuleError, ValidationRuleResult, ValidationRuleSuccess } from
 export interface FieldOptions {
   rule?: Rule<any>;
   fieldName?: string;
+  useFieldName?: boolean;
 }
 
 export const defaultFieldOptions: FieldOptions = {
   rule: new Rule(),
+  useFieldName: false,
 };
 
 export class Field<T, R extends Rule<T>> {
@@ -16,7 +18,7 @@ export class Field<T, R extends Rule<T>> {
   protected rules: R[];
 
   constructor(opts: FieldOptions = defaultFieldOptions) {
-    this.opts = opts;
+    this.opts = { ... defaultFieldOptions, ...opts };
     this.rules = [];
   }
 
