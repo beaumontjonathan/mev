@@ -20,8 +20,13 @@ class Schema {
     }
     addSchemaField(fieldName, schema) {
         this.ensureFieldNameIsUnique(fieldName);
-        this.fields.set(fieldName, schema);
-        return this;
+        if (typeof schema === 'function') {
+            return this.addSchemaField(fieldName, schema(new Schema()));
+        }
+        else {
+            this.fields.set(fieldName, schema);
+            return this;
+        }
     }
     run(obj) {
         function objHasResultPropAsFailure(o) {

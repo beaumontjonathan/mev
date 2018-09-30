@@ -61,6 +61,11 @@ describe('Schema', () => {
             };
             chai_1.expect(schema4.run(data)).to.deep.equal(expectedError);
         });
+        it('should accept a function which is passed a new schema', () => {
+            const createSchema = () => new Schema_1.Schema()
+                .addSchemaField('name', (s) => s);
+            chai_1.expect(createSchema).to.not.throw(Error);
+        });
     });
     describe('run', () => {
         it('should return errors for each failing test for each field', () => {

@@ -12,6 +12,7 @@ export declare class Schema {
     addField<T, F extends Field<T, Rule<T>>>(fieldName: string, field: (ff: FieldFactory<T, Rule<T>>) => F): this;
     addField<T, F extends Field<T, Rule<T>>>(fieldName: string, field: F): this;
     addSchemaField(fieldName: string, schema: Schema): this;
+    addSchemaField(fieldName: string, schema: (sf: Schema) => Schema): this;
     run(obj: any): Validation;
     private ensureFieldNameIsUnique;
 }

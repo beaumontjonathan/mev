@@ -1,9 +1,9 @@
 import { Field } from '../field/Field';
 import { FieldFactory } from '../field/FieldFactory';
 import { Rule } from '../rule/Rule';
-import { Validation, ValidationError, ValidationSuccess } from '../types/Validation';
+import { Validation, ValidationError } from '../types/Validation';
 import { ValidationRuleError } from '../types/ValidationRule';
-import { isError, isSuccess } from '../utils';
+import { isError } from '../utils';
 
 export interface SchemaOptions {
 }
@@ -33,10 +33,16 @@ export class Schema {
     }
   }
 
-  public addSchemaField(fieldName: string, schema: Schema): this {
+  public addSchemaField(fieldName: string, schema: Schema): this;
+  public addSchemaField(fieldName: string, schema: (sf: Schema) => Schema): this;
+  public addSchemaField(fieldName: string, schema: Schema | ((sf: Schema) => Schema)): this {
     this.ensureFieldNameIsUnique(fieldName);
-    this.fields.set(fieldName, schema);
-    return this;
+    if (typeof schema === 'function') {
+      return this.addSchemaField(fieldName, schema(new Schema()));
+    } else {
+      this.fields.set(fieldName, schema);
+      return this;
+    }
   }
 
   public run(obj: any): Validation {
@@ -75,12 +81,12 @@ export class Schema {
       .map(([fieldName, field]) => ({ fieldName, testResult: validateFieldOrSchema(field, obj[fieldName]) }))
       .filter(objHasResultPropAsFailure)
       .map(fieldAndResultToIncludeFieldNameAndOptionallyParent)
-        /*({ fieldName, testResult }) =>
-        testResult.errors.map((error: ValidationRuleError) => ({
-          fieldName,
-          ...error,
-        })),
-      )*/
+      /*({ fieldName, testResult }) =>
+      testResult.errors.map((error: ValidationRuleError) => ({
+        fieldName,
+        ...error,
+      })),
+    )*/
       .reduce((t, e) => t.concat(e), []);
 
     return errors.length === 0 ? { success: true } : { errors };

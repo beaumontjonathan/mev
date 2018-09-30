@@ -74,6 +74,13 @@ describe('Schema', () => {
 
       expect(schema4.run(data)).to.deep.equal(expectedError);
     });
+
+    it('should accept a function which is passed a new schema', () => {
+      const createSchema = () => new Schema()
+        .addSchemaField('name', (s) => s);
+
+      expect(createSchema).to.not.throw(Error);
+    });
   });
 
   describe('run', () => {
