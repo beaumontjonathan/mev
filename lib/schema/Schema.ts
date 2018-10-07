@@ -45,17 +45,17 @@ export class Schema {
     }
   }
 
-  public run(obj: any): Validation {
+  public test(obj: any): Validation {
     function objHasResultPropAsFailure(o: { fieldName: string, testResult: Validation }):
       o is { fieldName: string, testResult: ValidationError } {
       return isError(o.testResult);
     }
 
-    function validateFieldOrSchema(field: Schema | Field<any, Rule<any>>, data: any): Validation {
+    function testFieldOrSchema(field: Schema | Field<any, Rule<any>>, data: any): Validation {
       if (isSchema(field)) {
-        return field.run(data);
+        return field.test(data);
       } else {
-        return field.validate(data);
+        return field.test(data);
       }
     }
 
@@ -78,15 +78,9 @@ export class Schema {
 
     const errors = Array
       .from(this.fields)
-      .map(([fieldName, field]) => ({ fieldName, testResult: validateFieldOrSchema(field, obj[fieldName]) }))
+      .map(([fieldName, field]) => ({ fieldName, testResult: testFieldOrSchema(field, obj[fieldName]) }))
       .filter(objHasResultPropAsFailure)
       .map(fieldAndResultToIncludeFieldNameAndOptionallyParent)
-      /*({ fieldName, testResult }) =>
-      testResult.errors.map((error: ValidationRuleError) => ({
-        fieldName,
-        ...error,
-      })),
-    )*/
       .reduce((t, e) => t.concat(e), []);
 
     return errors.length === 0 ? { success: true } : { errors };

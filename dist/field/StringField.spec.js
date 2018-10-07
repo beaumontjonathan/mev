@@ -18,7 +18,7 @@ describe('StringField', () => {
                 .addRule(rule)
                 .addRule(rule2)
                 .addRule(rule3);
-            const validation = field.validate(testString);
+            const validation = field.test(testString);
             chai_1.expect(utils_1.isError(validation)).to.be;
             // @ts-ignore
             chai_1.expect(validation.errors).to.be.an.instanceof(Array);

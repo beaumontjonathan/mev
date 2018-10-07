@@ -40,7 +40,7 @@ export class Field<T, R extends Rule<T>> {
     }
   }
 
-  public validate(d: T): Validation {
+  public test(d: T): Validation {
     const errors: ValidationRuleError[] = this.rules
       .map((r) => r.test(d))
       .filter((r) => ruleIsError(r))

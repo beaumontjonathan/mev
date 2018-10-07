@@ -23,7 +23,7 @@ function deleteMatchingAttributes(obj, attributes) {
 exports.middlewave = (schema, options = defaultMiddlewareOptions) => (req, res, next) => {
     options = Object.assign({}, defaultMiddlewareOptions, options);
     if (req.body && req.body && req.body.data === 'object') {
-        const validation = schema.run(req.body.data);
+        const validation = schema.test(req.body.data);
         if (isSuccess(validation)) {
             next();
         }

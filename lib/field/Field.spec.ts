@@ -30,14 +30,14 @@ describe('Field', () => {
     });
   });
 
-  describe('validate', () => {
+  describe('test', () => {
     it('should return no errors when all rules pass', () => {
       const field: Field<any, Rule<any>> = new Field()
         .addRule((r) => r.addTestFunction(truthyTest))
         .addRule((r) => r.addTestFunction(truthyTest))
         .addRule((r) => r.addTestFunction(truthyTest));
 
-      expect(field.validate(emptyData)).to.deep.equal(success);
+      expect(field.test(emptyData)).to.deep.equal(success);
     });
 
     it('should return errors for each failing test', () => {
@@ -50,12 +50,12 @@ describe('Field', () => {
         errors: [{ ...emptyFail }],
       };
 
-      expect(field.validate(emptyData)).to.deep.equal(expectedError);
+      expect(field.test(emptyData)).to.deep.equal(expectedError);
 
       field.addRule((r) => r.addTestFunction(falsyTest));
       expectedError.errors.push(emptyFail);
 
-      expect(field.validate(emptyData)).to.deep.equal(expectedError);
+      expect(field.test(emptyData)).to.deep.equal(expectedError);
     });
   });
 });

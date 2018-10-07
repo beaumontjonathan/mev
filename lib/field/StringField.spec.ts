@@ -19,7 +19,7 @@ describe('StringField', () => {
         .addRule(rule2)
         .addRule(rule3);
 
-      const validation: ValidationError = field.validate(testString) as ValidationError;
+      const validation: ValidationError = field.test(testString) as ValidationError;
       expect(isError(validation)).to.be;
       // @ts-ignore
       expect(validation.errors).to.be.an.instanceof(Array);

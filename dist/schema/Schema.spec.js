@@ -29,7 +29,7 @@ describe('Schema', () => {
                     },
                 ],
             };
-            const validation = parentSchema.run({ parent: { child: 'asdf' } });
+            const validation = parentSchema.test({ parent: { child: 'asdf' } });
             chai_1.expect(validation).to.deep.equal(expectedError);
         });
         it('should accept deeper objects as arguments', () => {
@@ -59,7 +59,7 @@ describe('Schema', () => {
                     },
                 },
             };
-            chai_1.expect(schema4.run(data)).to.deep.equal(expectedError);
+            chai_1.expect(schema4.test(data)).to.deep.equal(expectedError);
         });
         it('should accept a function which is passed a new schema', () => {
             const createSchema = () => new Schema_1.Schema()

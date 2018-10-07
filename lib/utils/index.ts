@@ -32,7 +32,7 @@ export const middlewave =
     (req: any, res: any, next: () => {}) => {
       options = { ...defaultMiddlewareOptions, ...options };
       if (req.body && req.body && req.body.data === 'object') {
-        const validation = schema.run(req.body.data);
+        const validation = schema.test(req.body.data);
         if (isSuccess(validation)) {
           next();
         } else {

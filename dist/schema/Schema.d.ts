@@ -13,7 +13,7 @@ export declare class Schema {
     addField<T, F extends Field<T, Rule<T>>>(fieldName: string, field: F): this;
     addSchemaField(fieldName: string, schema: Schema): this;
     addSchemaField(fieldName: string, schema: (sf: Schema) => Schema): this;
-    run(obj: any): Validation;
+    test(obj: any): Validation;
     private ensureFieldNameIsUnique;
 }
 export declare function isSchema(s: Schema | Field<any, Rule<any>>): s is Schema;

@@ -20,13 +20,13 @@ describe('Field', () => {
             chai_1.expect(() => field.addRule(r)).to.throw(Error, 'Rule of type Object does not extend the required rule of type Rule');
         });
     });
-    describe('validate', () => {
+    describe('test', () => {
         it('should return no errors when all rules pass', () => {
             const field = new Field_1.Field()
                 .addRule((r) => r.addTestFunction(rule_1.truthyTest))
                 .addRule((r) => r.addTestFunction(rule_1.truthyTest))
                 .addRule((r) => r.addTestFunction(rule_1.truthyTest));
-            chai_1.expect(field.validate(rule_1.emptyData)).to.deep.equal(rule_1.success);
+            chai_1.expect(field.test(rule_1.emptyData)).to.deep.equal(rule_1.success);
         });
         it('should return errors for each failing test', () => {
             const field = new Field_1.Field()
@@ -36,10 +36,10 @@ describe('Field', () => {
             const expectedError = {
                 errors: [Object.assign({}, rule_1.emptyFail)],
             };
-            chai_1.expect(field.validate(rule_1.emptyData)).to.deep.equal(expectedError);
+            chai_1.expect(field.test(rule_1.emptyData)).to.deep.equal(expectedError);
             field.addRule((r) => r.addTestFunction(rule_1.falsyTest));
             expectedError.errors.push(rule_1.emptyFail);
-            chai_1.expect(field.validate(rule_1.emptyData)).to.deep.equal(expectedError);
+            chai_1.expect(field.test(rule_1.emptyData)).to.deep.equal(expectedError);
         });
     });
 });

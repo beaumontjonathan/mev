@@ -12,6 +12,6 @@ export declare class Field<T, R extends Rule<T>> {
     constructor(opts?: FieldOptions);
     addRule(r: R): this;
     addRule(fn: (r: R) => R): this;
-    validate(d: T): Validation;
+    test(d: T): Validation;
     protected getNewRule(): R;
 }

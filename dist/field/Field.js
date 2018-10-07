@@ -24,7 +24,7 @@ class Field {
             return this;
         }
     }
-    validate(d) {
+    test(d) {
         const errors = this.rules
             .map((r) => r.test(d))
             .filter((r) => ruleIsError(r))

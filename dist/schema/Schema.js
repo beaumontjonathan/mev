@@ -28,16 +28,16 @@ class Schema {
             return this;
         }
     }
-    run(obj) {
+    test(obj) {
         function objHasResultPropAsFailure(o) {
             return utils_1.isError(o.testResult);
         }
-        function validateFieldOrSchema(field, data) {
+        function testFieldOrSchema(field, data) {
             if (isSchema(field)) {
-                return field.run(data);
+                return field.test(data);
             }
             else {
-                return field.validate(data);
+                return field.test(data);
             }
         }
         const fieldAndResultToIncludeFieldNameAndOptionallyParent = (asdf) => {
@@ -51,15 +51,9 @@ class Schema {
         };
         const errors = Array
             .from(this.fields)
-            .map(([fieldName, field]) => ({ fieldName, testResult: validateFieldOrSchema(field, obj[fieldName]) }))
+            .map(([fieldName, field]) => ({ fieldName, testResult: testFieldOrSchema(field, obj[fieldName]) }))
             .filter(objHasResultPropAsFailure)
             .map(fieldAndResultToIncludeFieldNameAndOptionallyParent)
-            /*({ fieldName, testResult }) =>
-            testResult.errors.map((error: ValidationRuleError) => ({
-              fieldName,
-              ...error,
-            })),
-          )*/
             .reduce((t, e) => t.concat(e), []);
         return errors.length === 0 ? { success: true } : { errors };
     }

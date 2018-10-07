@@ -36,7 +36,7 @@ describe('Schema', () => {
         ],
       };
 
-      const validation: Validation = parentSchema.run({ parent: { child: 'asdf' } });
+      const validation: Validation = parentSchema.test({ parent: { child: 'asdf' } });
 
       expect(validation).to.deep.equal(expectedError);
     });
@@ -72,7 +72,7 @@ describe('Schema', () => {
         },
       };
 
-      expect(schema4.run(data)).to.deep.equal(expectedError);
+      expect(schema4.test(data)).to.deep.equal(expectedError);
     });
 
     it('should accept a function which is passed a new schema', () => {
