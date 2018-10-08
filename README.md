@@ -34,7 +34,7 @@ $ yarn add mev
 ## Features
 
 - Object and primitive data validation
-- Customisable, user friendly errors
+- Customisable, user-friendly errors
 - Chain based API
 - Written in TypeScript
 - Reusable by design
@@ -70,7 +70,7 @@ rule.test('not short');
 
 Here the `addTestFunction` method is being used to specify the validation test. Each rule may have as many tests as desired, however it is recommended to keep rules atomic for more specific error messages.
 
-Mev has many build in methods for testing data. These are specific to the data type being tested, and as such there is an extension of `Rule` for each primitive data type `string`, `number` & `boolean`.
+Mev has many built in methods for testing data. These are specific to the data type being tested, and as such there is an extension of `Rule` for each primitive data type `string`, `number` & `boolean`.
 
 ### `StringRule`
 
@@ -328,3 +328,39 @@ schema.test({
 
 When rules fail in a nested schema, the `fieldName` and `parent` schema are also included in the error object.
 
+## Utils
+
+Provided are methods for determining the outcome of a validation test.
+
+This allows type knowledge of the result which is essential in TypeScript
+and useful for the type knowledge in your IDE.
+
+### `isSuccess` & `isError`
+
+```js
+import { isSuccess, isError, createValidationSchema } from 'mev';
+
+const schema = createValidationSchema()
+  .addField('age', f => f
+    .number()
+    .addRule(r => r
+      .title('negative age')
+      .description('an age must be greater than 0')
+      .min(0)
+    )
+  );
+
+const result = schema.test({ age: 32 });
+
+if (isSuccess(result)) {
+  // will have access to result.success
+} else {
+  // will have access to result.errors
+}
+
+if (isError(result)) {
+  // will have access to result.errors
+} else {
+  // will have access to result.success
+}
+```
