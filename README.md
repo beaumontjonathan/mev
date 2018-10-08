@@ -2,7 +2,7 @@
 
 Meaningful Error Validation for everyone.
 
-[![Build Status](https://travis-ci.com/beaumontjonathan/unnamed-validator.svg?branch=master)](https://travis-ci.com/beaumontjonathan/unnamed-validator)
+[![Build Status](https://travis-ci.com/beaumontjonathan/mev.svg?branch=master)](https://travis-ci.com/beaumontjonathan/mev)
 
 ```js
 import { createValidationSchema } from 'mev';
