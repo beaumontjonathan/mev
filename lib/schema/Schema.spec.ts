@@ -101,6 +101,8 @@ describe('Schema', () => {
           .string()
           .addRule((r) => r.maxLength(5)),
         );
+
+      schema.test({});
     });
   });
 });

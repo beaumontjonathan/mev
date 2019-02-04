@@ -1,5 +1,5 @@
-import { Rule } from '../rule/Rule';
-import { Validation } from '../types/Validation';
+import { Rule } from '../rule';
+import { Validation } from '../types';
 export interface FieldOptions {
     rule?: Rule<any>;
     fieldName?: string;

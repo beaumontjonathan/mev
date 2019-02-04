@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Rule_1 = require("../rule/Rule");
+const rule_1 = require("../rule");
 exports.defaultFieldOptions = {
-    rule: new Rule_1.Rule(),
+    rule: new rule_1.Rule(),
     useFieldName: false,
 };
 class Field {

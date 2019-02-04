@@ -7,14 +7,14 @@ class StringRule extends Rule_1.Rule {
         super(opts);
     }
     minLength(min) {
-        this.addInternalTestFunction((str) => str.length >= min, {
+        this.addInternalTestFunction((str) => str && str.length >= min, {
             title: 'too short',
             description: `must be at least ${min} characters long`,
         });
         return this;
     }
     maxLength(max) {
-        this.addInternalTestFunction((str) => str.length <= max, {
+        this.addInternalTestFunction((str) => !str || str.length <= max, {
             title: 'too long',
             description: `must not be longer than ${max} characters long`,
         });

@@ -77,6 +77,13 @@ describe('Schema', () => {
             const rule = new StringRule_1.StringRule()
                 .maxLength(5);
         });
+        it('should not fail empty or missing fields', () => {
+            const schema = new Schema_1.Schema()
+                .addField('name', (f) => f
+                .string()
+                .addRule((r) => r.maxLength(5)));
+            schema.test({});
+        });
     });
 });
 //# sourceMappingURL=Schema.spec.js.map
