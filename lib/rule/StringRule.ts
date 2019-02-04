@@ -14,7 +14,7 @@ export class StringRule extends Rule<string> {
   }
 
   public minLength(min: number): this {
-    this.addInternalTestFunction((str) => str.length >= min, {
+    this.addInternalTestFunction((str) => str && str.length >= min, {
       title: 'too short',
       description: `must be at least ${min} characters long`,
     });
@@ -22,7 +22,7 @@ export class StringRule extends Rule<string> {
   }
 
   public maxLength(max: number): this {
-    this.addInternalTestFunction((str) => str.length <= max, {
+    this.addInternalTestFunction((str) => !str || str.length <= max, {
       title: 'too long',
       description: `must not be longer than ${max} characters long`,
     });

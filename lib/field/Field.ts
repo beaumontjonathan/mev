@@ -1,6 +1,6 @@
-import { Rule } from '../rule/Rule';
-import { Validation } from '../types/Validation';
-import { ValidationRuleError, ValidationRuleResult, ValidationRuleSuccess } from '../types/ValidationRule';
+import { Rule } from '../rule';
+import { Validation } from '../types';
+import { ValidationRuleError, ValidationRuleResult, ValidationRuleSuccess } from '../types';
 
 export interface FieldOptions {
   rule?: Rule<any>;

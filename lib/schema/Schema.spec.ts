@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
 import { StringRule } from '../rule/StringRule';
-import { emptyData, emptyFail, truthyTest } from '../test_helpers/rule';
 import { Validation, ValidationError } from '../types/Validation';
 import { Schema } from './Schema';
 
@@ -94,6 +93,14 @@ describe('Schema', () => {
 
       const rule: StringRule = new StringRule()
         .maxLength(5);
+    });
+
+    it('should not fail empty or missing fields', () => {
+      const schema: Schema = new Schema()
+        .addField('name', (f) => f
+          .string()
+          .addRule((r) => r.maxLength(5)),
+        );
     });
   });
 });

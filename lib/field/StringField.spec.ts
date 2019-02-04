@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import 'mocha';
-import { createValidationRule } from '..';
-import { StringRule } from '../rule/StringRule';
+import { createValidationRule, isSuccess } from '..';
+import { StringRule } from '../rule';
 import { extractRule } from '../test_helpers/field';
-import { Validation, ValidationError } from '../types/Validation';
+import { Validation, ValidationError } from '../types';
 import { isError } from '../utils';
 import { StringField } from './StringField';
 
@@ -35,6 +35,15 @@ describe('StringField', () => {
       // @ts-ignore
       field.addRule(extractRule(r));
       expect(r.rule).to.an.instanceOf(StringRule);
+    });
+
+    it('should not fail if undefined', () => {
+      const emptyValue: undefined = undefined;
+      const field: StringField = new StringField()
+        .addRule((r) => r.maxLength(10));
+
+      const validation: Validation = field.test(emptyValue);
+      expect(isSuccess(validation)).to.be.true;
     });
   });
 });
