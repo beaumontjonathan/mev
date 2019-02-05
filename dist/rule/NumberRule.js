@@ -7,7 +7,7 @@ class NumberRule extends Rule_1.Rule {
         super(opts);
     }
     min(min) {
-        this.addInternalTestFunction((n) => n >= min, {
+        this.addNonRequiredInternalTestFunction((n) => n >= min, {
             title: 'less than minimum',
             description: `must be greater than the minimum value of ${min}`,
         });
@@ -18,14 +18,14 @@ class NumberRule extends Rule_1.Rule {
         return this;
     }
     openMin(min) {
-        this.addInternalTestFunction((n) => n > min, {
+        this.addNonRequiredInternalTestFunction((n) => n > min, {
             title: 'less than or equal to minimum',
             description: `must be greater than the open minimum value of ${min}`,
         });
         return this;
     }
     max(max) {
-        this.addInternalTestFunction((n) => n <= max, {
+        this.addNonRequiredInternalTestFunction((n) => n <= max, {
             title: 'greater than maximum',
             description: `must be less than the maximum value of ${max}`,
         });
@@ -36,21 +36,21 @@ class NumberRule extends Rule_1.Rule {
         return this;
     }
     openMax(max) {
-        this.addInternalTestFunction((n) => n < max, {
+        this.addNonRequiredInternalTestFunction((n) => n < max, {
             title: 'greater than or equal to maximum',
             description: `must be less than the open maximum value of ${max}`,
         });
         return this;
     }
     closedInterval(min, max) {
-        this.addInternalTestFunction((n) => n >= min && n <= max, {
+        this.addNonRequiredInternalTestFunction((n) => n >= min && n <= max, {
             title: 'outside closed interval',
             description: `outside of the closed interval of [${min},${max}]`,
         });
         return this;
     }
     openInterval(min, max) {
-        this.addInternalTestFunction((n) => n > min && n < max, {
+        this.addNonRequiredInternalTestFunction((n) => n > min && n < max, {
             title: 'outside open interval',
             description: `outside of the open interval of (${min},${max})`,
         });

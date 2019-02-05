@@ -7,14 +7,14 @@ class BooleanRule extends Rule_1.Rule {
         super(opts);
     }
     true() {
-        this.addInternalTestFunction((b) => b, {
+        this.addNonRequiredInternalTestFunction((b) => b, {
             title: 'not true',
             description: 'must be true',
         });
         return this;
     }
     false() {
-        this.addInternalTestFunction((b) => !b, {
+        this.addNonRequiredInternalTestFunction((b) => !b, {
             title: 'not false',
             description: 'must be false',
         });

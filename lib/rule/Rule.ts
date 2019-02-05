@@ -1,6 +1,6 @@
 import {
   DefaultValidationRuleError,
-  RuleTest, TestAndOptionalDefaultError,
+  RuleTest,
   ValidationRuleError,
   ValidationRuleResult, ValidationRuleSuccess,
 } from '../types/ValidationRule';
@@ -15,6 +15,10 @@ export interface RuleOptions {
 export const defaultRuleOptions: RuleOptions = {};
 
 export class Rule<T> {
+  protected static valueIsEmpty(value: any): boolean {
+    return value === undefined || value === null;
+  }
+
   protected readonly opts: RuleOptions;
   protected readonly testRunner: RuleTestRunner<T>;
   protected internalTitle: string;
@@ -35,11 +39,24 @@ export class Rule<T> {
     return this;
   }
 
+  public required(): this {
+    this.addInternalTestFunction((data: any) => !Rule.valueIsEmpty(data), {
+      title: 'required',
+      description: `is required to have a value`,
+    });
+    return this;
+  }
+
   public addTestFunction(test: RuleTest<T>): this {
     this.testRunner.addTest({ test });
     return this;
   }
 
+  public addNonRequiredTestFunction(test: RuleTest<T>): this {
+    const combinedTest = (data: any) => Rule.valueIsEmpty(data) || test(data);
+    this.addTestFunction(combinedTest);
+    return this;
+  }
   public test(data: T): ValidationRuleResult {
     const validationRuleResult: ValidationRuleResult = this.testRunner.run(data);
     const fieldName = this.getFieldNameOrEmpty();
@@ -56,6 +73,12 @@ export class Rule<T> {
 
   protected addInternalTestFunction(test: RuleTest<T>, defaultError?: DefaultValidationRuleError): this {
     this.testRunner.addTest({ test, defaultError });
+    return this;
+  }
+
+  protected addNonRequiredInternalTestFunction(test: RuleTest<T>, defaultError?: DefaultValidationRuleError): this {
+    const combinedTest = (data: any) => Rule.valueIsEmpty(data) || test(data);
+    this.addInternalTestFunction(combinedTest, defaultError);
     return this;
   }
 

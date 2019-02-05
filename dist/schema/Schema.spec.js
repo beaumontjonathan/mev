@@ -84,6 +84,13 @@ describe('Schema', () => {
                 .addRule((r) => r.maxLength(5)));
             schema.test({});
         });
+        it('should pass', () => {
+            const schema = new Schema_1.Schema()
+                .addField('required', (f) => f
+                .string()
+                .addRule((r) => r.minLength(4))
+                .addRule((r) => r.maxLength(10)));
+        });
     });
 });
 //# sourceMappingURL=Schema.spec.js.map

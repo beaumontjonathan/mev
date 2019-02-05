@@ -14,7 +14,7 @@ export class StringRule extends Rule<string> {
   }
 
   public minLength(min: number): this {
-    this.addInternalTestFunction((str) => str && str.length >= min, {
+    this.addNonRequiredInternalTestFunction((str) => str && str.length >= min, {
       title: 'too short',
       description: `must be at least ${min} characters long`,
     });
@@ -22,7 +22,7 @@ export class StringRule extends Rule<string> {
   }
 
   public maxLength(max: number): this {
-    this.addInternalTestFunction((str) => !str || str.length <= max, {
+    this.addNonRequiredInternalTestFunction((str) => !str || str.length <= max, {
       title: 'too long',
       description: `must not be longer than ${max} characters long`,
     });
@@ -30,7 +30,7 @@ export class StringRule extends Rule<string> {
   }
 
   public blacklist(list: string[]): this {
-    this.addInternalTestFunction((str) => !list.some((item) => str.includes(item)), {
+    this.addNonRequiredInternalTestFunction((str) => !list.some((item) => str.includes(item)), {
       title: 'failed blacklist',
       description: `must not contain one of the blacklisted phrases '${list.join('\', \'')}'`,
     });
@@ -38,7 +38,7 @@ export class StringRule extends Rule<string> {
   }
 
   public upperCase(): this {
-    this.addInternalTestFunction((str) => !/[a-z]/.test(str), {
+    this.addNonRequiredInternalTestFunction((str) => !/[a-z]/.test(str), {
       title: 'contains lowercase',
       description: 'must not contain lowercase characters',
     });
@@ -46,7 +46,7 @@ export class StringRule extends Rule<string> {
   }
 
   public lowerCase(): this {
-    this.addInternalTestFunction((str) => !/[A-Z]/.test(str), {
+    this.addNonRequiredInternalTestFunction((str) => !/[A-Z]/.test(str), {
       title: 'contains uppercase',
       description: 'must not contain uppercase characters',
     });
@@ -54,7 +54,7 @@ export class StringRule extends Rule<string> {
   }
 
   public alphanumeric(): this {
-    this.addInternalTestFunction((str) => /^[a-zA-Z0-9]*$/.test(str), {
+    this.addNonRequiredInternalTestFunction((str) => /^[a-zA-Z0-9]*$/.test(str), {
       title: 'not alphanumeric',
       description: 'must only contain letters and numbers',
     });
@@ -62,7 +62,7 @@ export class StringRule extends Rule<string> {
   }
 
   public regex(regex: RegExp): this {
-    this.addInternalTestFunction((str) => regex.test(str), {
+    this.addNonRequiredInternalTestFunction((str) => regex.test(str), {
       title: 'failed regex',
       description: `failed the regular expression '${regex}'`,
     });

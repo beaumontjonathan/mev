@@ -14,7 +14,7 @@ export class BooleanRule extends Rule<boolean> {
   }
 
   public true(): this {
-    this.addInternalTestFunction((b) => b, {
+    this.addNonRequiredInternalTestFunction((b) => b, {
       title: 'not true',
       description: 'must be true',
     });
@@ -22,7 +22,7 @@ export class BooleanRule extends Rule<boolean> {
   }
 
   public false(): this {
-    this.addInternalTestFunction((b) => !b, {
+    this.addNonRequiredInternalTestFunction((b) => !b, {
       title: 'not false',
       description: 'must be false',
     });

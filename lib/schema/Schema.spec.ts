@@ -104,5 +104,14 @@ describe('Schema', () => {
 
       schema.test({});
     });
+
+    it('should pass', () => {
+      const schema: Schema = new Schema()
+        .addField('required', (f) => f
+          .string()
+          .addRule((r) => r.minLength(4))
+          .addRule((r) => r.maxLength(10)),
+        );
+    });
   });
 });
