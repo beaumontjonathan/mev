@@ -1,5 +1,5 @@
 import { createValidationField, createValidationRule } from '..';
-import { ValidationRuleError, ValidationRuleSuccess } from '../types/ValidationRule';
+import { ValidationRuleError, ValidationRuleSuccess } from '../types';
 
 export const emptyFail: ValidationRuleError = {
   title: '',

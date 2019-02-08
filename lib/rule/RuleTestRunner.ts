@@ -4,7 +4,7 @@ import {
   TestAndOptionalDefaultError,
   ValidationRuleError,
   ValidationRuleResult,
-} from '../types/ValidationRule';
+} from '../types';
 
 export interface RuleTestRunnerOptions {
   failOnEmptyTestList?: boolean;

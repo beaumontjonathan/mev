@@ -1,4 +1,4 @@
-import { ValidationRuleError, ValidationRuleSuccess } from '../types/ValidationRule';
+import { ValidationRuleError, ValidationRuleSuccess } from '../types';
 export declare const emptyFail: ValidationRuleError;
 export declare const success: ValidationRuleSuccess;
 export declare const emptyData: any;

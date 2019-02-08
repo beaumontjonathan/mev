@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { Rule } from '../rule/Rule';
+import { Rule } from '../rule';
 import { BooleanField } from './BooleanField';
 import { Field } from './Field';
 import { createValidationField, FieldFactory } from './FieldFactory';

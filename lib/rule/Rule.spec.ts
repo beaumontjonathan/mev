@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import { emptyData, emptyFail, falsyTest, success, truthyTest } from '../test_helpers/rule';
-import { ValidationRuleError } from '../types/ValidationRule';
+import { ValidationRuleError } from '../types';
 import { Rule } from './Rule';
 
 describe('Rule', () => {

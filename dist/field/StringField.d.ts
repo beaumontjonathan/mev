@@ -1,4 +1,4 @@
-import { StringRule } from '../rule/StringRule';
+import { StringRule } from '../rule';
 import { Field, FieldOptions } from './Field';
 export interface StringFieldOptions extends FieldOptions {
 }

@@ -1,4 +1,4 @@
-import { DefaultValidationRuleError, RuleTest, ValidationRuleResult } from '../types/ValidationRule';
+import { DefaultValidationRuleError, RuleTest, ValidationRuleResult } from '../types';
 import { RuleTestRunner } from './RuleTestRunner';
 export interface RuleOptions {
     fieldName?: string;

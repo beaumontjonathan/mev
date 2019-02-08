@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
-import { emptyFail, success, truthyTest } from '../test_helpers/rule';
-import { ValidationRuleError } from '../types/ValidationRule';
+import { success } from '../test_helpers/rule';
+import { ValidationRuleError } from '../types';
 import { StringRule } from './StringRule';
 
 describe('StringRule', () => {

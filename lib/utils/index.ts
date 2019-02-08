@@ -1,4 +1,4 @@
-import { Validation, ValidationError, ValidationSuccess } from '../types/Validation';
+import { Validation, ValidationError, ValidationSuccess } from '../types';
 
 export function isSuccess(val: Validation): val is ValidationSuccess {
   return (val as ValidationSuccess).success;

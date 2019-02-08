@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { NumberRule } from '../rule/NumberRule';
+import { NumberRule } from '../rule';
 import { extractRule } from '../test_helpers/field';
 import { NumberField } from './NumberField';
 

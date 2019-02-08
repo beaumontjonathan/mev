@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
 require("mocha");
-const StringRule_1 = require("../rule/StringRule");
+const rule_1 = require("../rule");
 const Schema_1 = require("./Schema");
 describe('Schema', () => {
     describe('addField', () => {
@@ -74,7 +74,7 @@ describe('Schema', () => {
                 .string()
                 .addRule((r) => r.minLength(3))
                 .addRule((r) => r.maxLength(5)));
-            const rule = new StringRule_1.StringRule()
+            const rule = new rule_1.StringRule()
                 .maxLength(5);
         });
         it('should not fail empty or missing fields', () => {

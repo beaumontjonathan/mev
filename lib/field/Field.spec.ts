@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import 'mocha';
-import { Rule } from '../rule/Rule';
+import { Rule } from '../rule';
 import { extractRule } from '../test_helpers/field';
 import { emptyData, emptyFail, falsyTest, success, truthyTest } from '../test_helpers/rule';
-import { Validation } from '../types/Validation';
+import { Validation } from '../types';
 import { Field } from './Field';
 
 describe('Field', () => {

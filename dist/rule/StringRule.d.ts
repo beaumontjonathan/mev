@@ -1,4 +1,4 @@
-import { ValidationRuleResult } from '../types/ValidationRule';
+import { ValidationRuleResult } from '../types';
 import { Rule, RuleOptions } from './Rule';
 export interface StringRuleOptions extends RuleOptions {
 }

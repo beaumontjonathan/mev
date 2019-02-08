@@ -1,4 +1,4 @@
-import { NumberRule } from '../rule/NumberRule';
+import { NumberRule } from '../rule';
 import { Field, FieldOptions } from './Field';
 export interface NumberFieldOptions extends FieldOptions {
 }

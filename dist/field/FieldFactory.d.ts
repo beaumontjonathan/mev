@@ -1,4 +1,4 @@
-import { Rule } from '../rule/Rule';
+import { Rule } from '../rule';
 import { ValidationFactory } from '../types/ValidationFactory';
 import { BooleanField, BooleanFieldOptions } from './BooleanField';
 import { Field, FieldOptions } from './Field';

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
-const NumberRule_1 = require("../rule/NumberRule");
+const rule_1 = require("../rule");
 const field_1 = require("../test_helpers/field");
 const NumberField_1 = require("./NumberField");
 describe('NumberField', () => {
@@ -11,7 +11,7 @@ describe('NumberField', () => {
             const r = {};
             // @ts-ignore
             field.addRule(field_1.extractRule(r));
-            chai_1.expect(r.rule).to.an.instanceOf(NumberRule_1.NumberRule);
+            chai_1.expect(r.rule).to.an.instanceOf(rule_1.NumberRule);
         });
     });
 });

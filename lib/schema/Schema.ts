@@ -1,8 +1,8 @@
-import { Field } from '../field/Field';
+import { Field } from '../field';
 import { FieldFactory } from '../field/FieldFactory';
-import { Rule } from '../rule/Rule';
-import { Validation, ValidationError } from '../types/Validation';
-import { ValidationRuleError } from '../types/ValidationRule';
+import { Rule } from '../rule';
+import { Validation, ValidationError } from '../types';
+import { ValidationRuleError } from '../types';
 import { isError } from '../utils';
 
 export interface SchemaOptions {

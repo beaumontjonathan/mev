@@ -1,7 +1,7 @@
-import { Field } from '../field/Field';
+import { Field } from '../field';
 import { FieldFactory } from '../field/FieldFactory';
-import { Rule } from '../rule/Rule';
-import { Validation } from '../types/Validation';
+import { Rule } from '../rule';
+import { Validation } from '../types';
 export interface SchemaOptions {
 }
 export declare const defaultSchemaOptions: SchemaOptions;

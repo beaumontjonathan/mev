@@ -1,5 +1,5 @@
 import { RuleTestRunnerOptions } from '../rule/RuleTestRunner';
-import { TestAndOptionalDefaultError, ValidationRuleResult } from '../types/ValidationRule';
+import { TestAndOptionalDefaultError, ValidationRuleResult } from '../types';
 export interface RuleTestRunnerOptions {
     failOnEmptyTestList?: boolean;
     defaultErrorJoiner?: string;

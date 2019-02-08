@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { BooleanRule } from '../rule/BooleanRule';
-import { StringRule } from '../rule/StringRule';
+import { BooleanRule } from '../rule';
+import { StringRule } from '../rule';
 import { extractRule } from '../test_helpers/field';
 import { BooleanField } from './BooleanField';
 

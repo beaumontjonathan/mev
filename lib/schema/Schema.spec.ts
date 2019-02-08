@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
-import { StringRule } from '../rule/StringRule';
-import { Validation, ValidationError } from '../types/Validation';
+import { StringRule } from '../rule';
+import { Validation, ValidationError } from '../types';
 import { Schema } from './Schema';
 
 describe('Schema', () => {

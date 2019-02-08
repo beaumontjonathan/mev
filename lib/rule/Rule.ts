@@ -3,7 +3,7 @@ import {
   RuleTest,
   ValidationRuleError,
   ValidationRuleResult, ValidationRuleSuccess,
-} from '../types/ValidationRule';
+} from '../types';
 import { RuleTestRunner, RuleTestRunnerOptions } from './RuleTestRunner';
 
 export interface RuleOptions {

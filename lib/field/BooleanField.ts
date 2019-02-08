@@ -1,4 +1,4 @@
-import { BooleanRule } from '../rule/BooleanRule';
+import { BooleanRule } from '../rule';
 import { defaultFieldOptions, Field, FieldOptions } from './Field';
 
 export interface BooleanFieldOptions extends FieldOptions {
