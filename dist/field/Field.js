@@ -6,9 +6,9 @@ exports.defaultFieldOptions = {
     useFieldName: false,
 };
 class Field {
-    constructor(opts = exports.defaultFieldOptions) {
+    constructor(opts = exports.defaultFieldOptions, rules = []) {
         this.opts = Object.assign({}, exports.defaultFieldOptions, opts);
-        this.rules = [];
+        this.rules = rules;
     }
     addRule(d) {
         if (typeof d === 'function') {
@@ -35,6 +35,9 @@ class Field {
         else {
             return { errors };
         }
+    }
+    clone() {
+        return new Field(this.opts, [...this.rules]);
     }
     getNewRule() {
         return new (Object.getPrototypeOf(this.opts.rule).constructor)(this.opts);

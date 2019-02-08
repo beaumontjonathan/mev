@@ -17,9 +17,9 @@ export class Field<T, R extends Rule<T>> {
   protected opts: FieldOptions;
   protected rules: R[];
 
-  constructor(opts: FieldOptions = defaultFieldOptions) {
+  constructor(opts: FieldOptions = defaultFieldOptions, rules: R[] = []) {
     this.opts = { ... defaultFieldOptions, ...opts };
-    this.rules = [];
+    this.rules = rules;
   }
 
   public addRule(r: R): this;
@@ -45,11 +45,16 @@ export class Field<T, R extends Rule<T>> {
       .map((r) => r.test(d))
       .filter((r) => ruleIsError(r))
       .reduce((t, e) => t.concat(e), []);
+
     if (errors.length === 0) {
       return { success: true };
     } else {
       return { errors };
     }
+  }
+
+  public clone(): Field<T, R> {
+    return new Field<T, R>(this.opts, [...this.rules]);
   }
 
   protected getNewRule(): R {

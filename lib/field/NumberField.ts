@@ -10,7 +10,11 @@ export const defaultNumberFieldOptions: NumberFieldOptions = {
 };
 
 export class NumberField extends Field<number, NumberRule> {
-  constructor(opts: NumberFieldOptions = defaultNumberFieldOptions) {
-    super(opts);
+  constructor(opts: NumberFieldOptions = defaultNumberFieldOptions, rules: NumberRule[] = []) {
+    super(opts, rules);
+  }
+
+  public clone(): NumberField {
+    return new NumberField(this.opts, [...this.rules]);
   }
 }

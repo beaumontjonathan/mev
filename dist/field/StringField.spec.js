@@ -40,5 +40,17 @@ describe('StringField', () => {
             chai_1.expect(__1.isSuccess(validation)).to.be.true;
         });
     });
+    describe('clone', () => {
+        it('should not affect cloned fields', () => {
+            const emptyValue = undefined;
+            const field = new StringField_1.StringField()
+                .addRule((r) => r.maxLength(10));
+            const clone = field.clone().addRule((r) => r.required());
+            const originalValidation = field.test(emptyValue);
+            const clonedValidation = clone.test(emptyValue);
+            chai_1.expect(__1.isSuccess(originalValidation)).to.be.true;
+            chai_1.expect(__1.isSuccess(clonedValidation)).to.be.false;
+        });
+    });
 });
 //# sourceMappingURL=StringField.spec.js.map

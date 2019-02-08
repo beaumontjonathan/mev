@@ -4,5 +4,6 @@ export interface BooleanFieldOptions extends FieldOptions {
 }
 export declare const defaultBooleanFieldOptions: BooleanFieldOptions;
 export declare class BooleanField extends Field<boolean, BooleanRule> {
-    constructor(opts?: BooleanFieldOptions);
+    constructor(opts?: BooleanFieldOptions, rules?: BooleanRule[]);
+    clone(): BooleanField;
 }

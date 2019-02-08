@@ -1,7 +1,7 @@
 import { Validation, ValidationError, ValidationSuccess } from '../types';
 
 export function isSuccess(val: Validation): val is ValidationSuccess {
-  return (val as ValidationSuccess).success;
+  return !!(val as ValidationSuccess).success;
 }
 
 export function isError(val: Validation): val is ValidationError {

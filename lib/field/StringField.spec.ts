@@ -46,4 +46,19 @@ describe('StringField', () => {
       expect(isSuccess(validation)).to.be.true;
     });
   });
+
+  describe('clone', () => {
+    it('should not affect cloned fields', () => {
+      const emptyValue: undefined = undefined;
+      const field: StringField = new StringField()
+        .addRule((r) => r.maxLength(10));
+
+      const clone = field.clone().addRule((r) => r.required());
+
+      const originalValidation: Validation = field.test(emptyValue);
+      const clonedValidation: Validation = clone.test(emptyValue);
+      expect(isSuccess(originalValidation)).to.be.true;
+      expect(isSuccess(clonedValidation)).to.be.false;
+    });
+  });
 });

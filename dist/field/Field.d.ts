@@ -9,9 +9,10 @@ export declare const defaultFieldOptions: FieldOptions;
 export declare class Field<T, R extends Rule<T>> {
     protected opts: FieldOptions;
     protected rules: R[];
-    constructor(opts?: FieldOptions);
+    constructor(opts?: FieldOptions, rules?: R[]);
     addRule(r: R): this;
     addRule(fn: (r: R) => R): this;
     test(d: T): Validation;
+    clone(): Field<T, R>;
     protected getNewRule(): R;
 }
